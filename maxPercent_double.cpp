@@ -13,14 +13,14 @@ void writeFileText(string fileName, int n)
 {
     // if (fileName != NULL)
     // {
-    srand(time(NULL));
+    // srand(time(NULL));
     fstream file_mark;
     file_mark.open(fileName, ios::out);
     file_mark << n << "\n";
 
     for (int i = 0; i < n; i++)
     {
-        file_mark << (1+rand() % 4) * 2.3 << "\n";
+        file_mark << (1 + rand() % 4) * 2.3 << "\n";
     }
     file_mark.close();
 
@@ -34,11 +34,33 @@ void writeFileBin(string fileName, int n)
     double a[n];
     for (int i = 0; i < n; i++)
     {
-        a[i] = (1+rand() % 4) * 2.3;
+        a[i] = (1 + rand() % 4) * 2.3;
         file_mark_bin.write((char *)&a[i], sizeof(double));
     }
     file_mark_bin.close();
     cout << "Successfully write file " << fileName << endl;
+}
+
+void ReadFileText(double mark[], int *n, string fileName)
+{
+    ifstream infile(fileName, ios::in);
+    if (!infile.is_open())
+    {
+        cout << "Can not open file!";
+        return;
+    }
+    else
+    {
+        infile.seekg(0, ios::beg); // dua contro ve vi tri dau file
+        infile >> *n;
+        cout << *n << endl;
+        for (int i = 0; i < (*n); i++)
+        {
+            infile >> mark[i];
+            cout << mark[i] << endl;
+        }
+    }
+    infile.close();
 }
 
 void ReadFileBin(double mark[], int *n, string fileName)
@@ -48,9 +70,11 @@ void ReadFileBin(double mark[], int *n, string fileName)
     inFile.seekg(0, ios::beg); // dua contro ve vi tri dau file
     // inFile.seekg(4, ios::beg);
     inFile.read((char *)n, sizeof(int));
+    cout<<"\n"<<*n<<endl;   //test doc so diem (n=40)
     while (!inFile.eof())
     {
-        inFile.read((char *)&mark[i++], sizeof(double));
+        inFile.read((char *)&mark[i], sizeof(double));
+        // cout << "\n"<< mark[i++];
     }
     inFile.close();
 }
@@ -90,7 +114,7 @@ void maxPercent(string fileName, int n, double a[])
     ofstream result;
     result.open(fileName, ios::out);
     result << "Statistic for marks with the highest rates:\n";
-    quick_sort_incre(a, 0, n-1);
+    quick_sort_incre(a, 0, n - 1);
     int max = 0;
     int count = 1;
     for (int i = 0; i < n; i++)
@@ -103,7 +127,9 @@ void maxPercent(string fileName, int n, double a[])
         if (max < count)
             max = count; // tim ra max
     }
-    cout<< max<<endl;
+    cout << max << endl;
+
+    // in ra tat ca nhung count bang max
 
     int _count = 1;
     for (int i = 0; i < n; i++)
@@ -134,10 +160,13 @@ int main()
     string inputTxt = "Marks.txt";
     string inputBin = "Marks.bin";
     string outputFile = "MaxPercent.txt";
+    srand(time(NULL));
+
     writeFileText(inputTxt, numOfMarks);
     writeFileBin(inputBin, numOfMarks);
     int n;
     ReadFileBin(marks, &n, inputBin);
+    ReadFileText(marks, &n, inputTxt);
     maxPercent(outputFile, n, marks);
     return 0;
 }
