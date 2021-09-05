@@ -1,0 +1,25 @@
+câu hỏi lưu ý:
+1. Trình bày ý nghĩa của toán tử định phạm vi ::, toán tử .
+2. Phân biệt kn Overload (nạp chồng) vs Override (ghi đè)
+
+
+COPY CONSTRUCTORS:
+
+Một hàm khởi tạo sao chép sẽ được gọi khi nào?
+
+Hàm khởi tạo sao chép sẽ được gọi khi:
+
+    Khi một đối tượng của lớp được trả về bằng một giá trị.
+    Khi một đối tượng của lớp được truyền đối số dưới dạng tham số của một hàm.
+    Khi một đối tượng được tạo ra dựa trên một đối tượng khác cùng lớp.
+    Khi trình biên dịch tạo một đối tượng tạm thời.
+
+Tuy nhiên trên thực tế thì không chắc chắn rằng hàm khởi tạo sao chép sẽ được gọi trong tất cả 4 trường hợp ở phía trên. Vì C++ tiêu chuẩn sẽ cho phép trình biên dịch tối ưu hoá bản sao trong một số trường hợp nhất định.
+
+Một ví dụ cho điều này là: Ví dụ về tối ưu hoá giá trị trả về ( Có thể gọi tắt là RVO).
+
+Lưu ý:
+
+Nếu một hàm tạo sao chép không được định nghĩa trong một lớp, trình biên dịch sẽ tự nó định nghĩa nó. Vì thế phải thật lưu ý nếu lớp có các biến con trỏ hoặc có sử dụng cấp phát bộ nhớ động thì nên viết lại hàm.
+
+Chia sẻ nhỏ một chút là mình đã từng mắc lỗi tại đây do khi sử dụng cấp phát bộ nhớ động mà không viết lại hàm khởi tạo sao chép do đó dẫn đến việc truy cập sai ô nhớ.

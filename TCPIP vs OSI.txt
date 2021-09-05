@@ -1,0 +1,28 @@
+Phân biệt mô hình TCP/IP
+
+
+1. Application
+2. Transport 
+3. Internet
+4. Network access
+
+
+Layers
+5. App
+4. Trans
+3. Network
+2. Data Link 
+1. Physical 
+
+
+Giao thức TCP (Tranmission Control Protocol)
+TCP là giao thức truyền tải hướng kết nối (connection-oriented), nghĩa là phải thực hiện thiết lập kết nối với đầu xa trước khi thực hiện truyền dữ liệu. Tiến trình thiết lập kết nối ở TCP được gọi là tiến trình bắt tay 3 bước (threeway handshake).
+
+
+The Internet layer reads information in the header to identify the transmission. Then, the Internet layer determines if the packet is a fragment. If the transmission is fragmented, IP reassembles the fragments into the original datagram. IP then strips off the IP header and passes the datagram on to transport layer protocols.
+
+The transport layer (TCP, SCTP, and UDP) reads the header to determine which application layer protocol must receive the data. Then, TCP, SCTP, or UDP strips off its related header. TCP, SCTP, or UDP sends the message or stream to the receiving application.
+
+The application layer receives the message. The application layer then performs the operation that the sending host requested.
+
+

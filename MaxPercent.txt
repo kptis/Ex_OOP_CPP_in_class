@@ -1,0 +1,5 @@
+Statistic for marks with the highest rates:
+  4.6       30%
+
+  6.9       30%
+
